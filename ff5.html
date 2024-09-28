@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Fire Animated Profile with Background Music</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .profile-container {
+            text-align: center;
+            border: 3px solid #ffcc00;
+            border-radius: 20px;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.9);
+            width: 400px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8);
+            transform: scale(0.9);
+            animation: scaleUp 1s ease-in-out forwards;
+        }
+
+        @keyframes scaleUp {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .profile-header h1 {
+            color: #ffcc00;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            text-shadow: 0px 0px 10px rgba(255, 204, 0, 0.8);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .profile-picture img {
+            border-radius: 50%;
+            border: 4px solid #ffcc00;
+            width: 150px;
+            height: 150px;
+            animation: glowPicture 2s infinite alternate;
+        }
+
+        @keyframes glowPicture {
+            0% {
+                box-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00;
+            }
+            100% {
+                box-shadow: 0 0 30px #ffcc00, 0 0 60px #ffcc00;
+            }
+        }
+
+        .profile-info {
+            margin-top: 20px;
+        }
+
+        .profile-info h2 {
+            font-size: 2rem;
+            color: #ffcc00;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .profile-info p {
+            font-size: 1.2rem;
+        }
+
+        .uid-container {
+            margin-top: 15px;
+            cursor: pointer;
+            background-color: #444;
+            padding: 12px;
+            border-radius: 12px;
+            display: inline-block;
+            animation: pulse 1.5s infinite;
+        }
+
+        .uid-container:hover {
+            background-color: #555;
+        }
+
+        .uid-container span {
+            font-weight: bold;
+            color: #ffcc00;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .stats {
+            margin-top: 25px;
+            text-align: left;
+            padding-left: 30px;
+        }
+
+        .stats ul {
+            list-style-type: none;
+            font-size: 1.1rem;
+        }
+
+        .buttons {
+            margin-top: 25px;
+        }
+
+        .btn {
+            background-color: #ffcc00;
+            border: none;
+            padding: 12px 25px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #141e30;
+            text-transform: uppercase;
+            box-shadow: 0 5px 20px rgba(255, 204, 0, 0.4);
+            transition: all 0.3s ease;
+            animation: shake 2s infinite;
+        }
+
+        .btn:hover {
+            background-color: #fff;
+            box-shadow: 0 5px 30px rgba(255, 255, 255, 0.5);
+        }
+
+        @keyframes shake {
+            0% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-3px);
+            }
+            50% {
+                transform: translateX(3px);
+            }
+            75% {
+                transform: translateX(-3px);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Music -->
+    <audio id="background-music" loop>
+        <source src="DECA [SLOWED REVERB] TRASHXRL _ MC LYC4N(MP3_160K).mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <h1>FREEFIRE</h1>
+        </div>
+
+        <div class="profile-picture">
+            <img src="p.png" alt="Profile Picture">
+        </div>
+
+        <div class="profile-info">
+            <h2>BLACK-KATANA</h2>
+            <div class="uid-container" onclick="copyUID()">
+                UID: <span id="uid">8676348410</span> (Click to Copy)
+            </div>
+        </div>
+
+        <div class="stats">
+            <h3>Game Statistics</h3>
+            <ul>
+                <li>Kills: 1200</li>
+                <li>Matches Played: 500</li>
+                <li>Win Rate: 25%</li>
+            </ul>
+        </div>
+
+        <div class="buttons">
+            <button class="btn">Send Friend Request</button>
+            <button class="btn">Invite to Squad</button>
+        </div>
+    </div>
+
+    <script>
+        // Background Music Control
+        const backgroundMusic = document.getElementById('background-music');
+        backgroundMusic.volume = 0.5; // Set volume (0.0 to 1.0)
+        
+        // Start music when the page is fully loaded
+        window.addEventListener('load', () => {
+            backgroundMusic.play();
+        });
+
+        // Copy UID to clipboard
+        function copyUID() {
+            const uid = document.getElementById('uid').innerText;
+            navigator.clipboard.writeText(uid).then(() => {
+                alert('UID copied: ' + uid);
+            }).catch(err => {
+                console.error('Failed to copy UID: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
